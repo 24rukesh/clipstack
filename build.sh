@@ -65,9 +65,23 @@ if [ -n "$NOTARY_PROFILE" ]; then
   xcrun stapler staple build/ClipStack.app || echo "Staple failed; ensure notarization succeeded."
 fi
 
-echo "Creating DMG: dist/$DMG_NAME"
-hdiutil create -volname ClipStack -srcfolder build/ -ov -format UDZO dist/$DMG_NAME || echo "DMG creation failed"
+echo "Creating Zip: dist/ClipStack.app.zip"
+cd build
+zip -r ../dist/ClipStack.app.zip ClipStack.app
+cd - >/dev/null
+echo "Distribution artifact ready: dist/ClipStack.app.zip"
 
-echo "Distribution artifact ready: dist/$DMG_NAME"
+# Optional: Build a .pkg installer (single-file installer for /Applications)
+if command -v pkgbuild >/dev/null 2>&1; then
+  echo "Creating PKG: dist/ClipStack.pkg"
+  if [ -n "$SIGN_ID" ]; then
+    pkgbuild --install-location /Applications --component build/ClipStack.app --sign "$SIGN_ID" dist/ClipStack.pkg || echo "PKG build failed (signed)"
+  else
+    pkgbuild --install-location /Applications --component build/ClipStack.app dist/ClipStack.pkg || echo "PKG build failed"
+  fi
+  echo "Distribution artifact ready: dist/ClipStack.pkg"
+else
+  echo "pkgbuild not found; skipping PKG generation. Install Xcode Command Line Tools to enable."
+fi
 
 echo "Build complete! Application is located at build/ClipStack.app"

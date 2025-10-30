@@ -75,7 +75,8 @@ open build/ClipStack.app
 The build script will output:
 
   * `build/ClipStack.app` (Runnable app)
-  * `dist/ClipStack.dmg` (Shareable disk image)
+  * `dist/ClipStack.app.zip` (Zipped app bundle)
+  * `dist/ClipStack.pkg` (Installer that places the app in `/Applications`)
 
 ### Optional Signing (for Distribution)
 

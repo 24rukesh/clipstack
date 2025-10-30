@@ -4,6 +4,10 @@ struct ClipboardHistoryView: View {
     @ObservedObject var clipboardMonitor: ClipboardMonitor
     @State private var searchText = ""
     var onClose: (() -> Void)?
+    @State private var showPreferencesInline = false
+    private var supportsLoginItem: Bool {
+        if #available(macOS 13.0, *) { return true } else { return false }
+    }
     // Removed copiedItemId; each row manages its own copied state via its button
     
     var filteredHistory: [ClipboardItem] {
@@ -32,7 +36,7 @@ struct ClipboardHistoryView: View {
                 .disabled(clipboardMonitor.clipboardHistory.isEmpty)
                 .padding(.horizontal, 8)
                 Button(action: {
-                    (NSApp.delegate as? AppDelegate)?.openPreferences()
+                    withAnimation { showPreferencesInline.toggle() }
                 }) {
                     Image(systemName: "gearshape")
                 }
@@ -40,6 +44,36 @@ struct ClipboardHistoryView: View {
             }
             .padding(8)
             .background(Color.gray.opacity(0.2))
+            
+            if showPreferencesInline {
+                GroupBox(label: Text("Preferences")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Start at login")
+                            Spacer()
+                            Toggle("", isOn: Binding(
+                                get: { LoginItemManager.shared.isStartAtLoginEnabled() },
+                                set: { v in LoginItemManager.shared.setStartAtLogin(v) }
+                            ))
+                            .labelsHidden()
+                            .disabled(!supportsLoginItem)
+                        }
+                        if !supportsLoginItem {
+                            Text("Requires macOS 13 or later.")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        HStack {
+                            Spacer()
+                            Button("Close Preferences") {
+                                withAnimation { showPreferencesInline = false }
+                            }
+                        }
+                    }
+                    .padding(.vertical, 6)
+                }
+                .padding(.horizontal, 8)
+            }
             
             // Clipboard history list with auto-scroll to top on updates
             ScrollViewReader { proxy in
