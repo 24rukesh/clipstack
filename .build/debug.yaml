@@ -1,0 +1,92 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "ClipStack-arm64-apple-macosx26.0-debug.exe": ["<ClipStack-arm64-apple-macosx26.0-debug.exe>"]
+  "ClipStack-arm64-apple-macosx26.0-debug.module": ["<ClipStack-arm64-apple-macosx26.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<ClipStack-arm64-apple-macosx26.0-debug.exe>","<ClipStack-arm64-apple-macosx26.0-debug.module>"]
+  "test": ["<ClipStack-arm64-apple-macosx26.0-debug.exe>","<ClipStack-arm64-apple-macosx26.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/rukesh/Development/Clipboard/Sources/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack":
+    is-mutated: true
+commands:
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack-entitlement.plist":
+    tool: write-auxiliary-file
+    inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack-entitlement.plist"]
+    description: "Write auxiliary file /Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack-entitlement.plist"
+
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift","/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift","/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift","/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/DerivedSources/resource_bundle_accessor.swift"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/sources"]
+    description: "Write auxiliary file /Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/sources"
+
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swift.o"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.product/Objects.LinkFileList"
+
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack_ClipStack.bundle/ClipStackDataModel.xcdatamodeld":
+    tool: copy-tool
+    inputs: ["/Users/rukesh/Development/Clipboard/Sources/ClipStackDataModel.xcdatamodeld/"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack_ClipStack.bundle/ClipStackDataModel.xcdatamodeld/"]
+    description: "Copying /Users/rukesh/Development/Clipboard/Sources/ClipStackDataModel.xcdatamodeld"
+
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Library/Developer/CommandLineTools/usr/bin/swiftc"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+
+  "<ClipStack-arm64-apple-macosx26.0-debug.exe>":
+    tool: phony
+    inputs: ["<ClipStack-arm64-apple-macosx26.0-debug.exe-CodeSigning>"]
+    outputs: ["<ClipStack-arm64-apple-macosx26.0-debug.exe>"]
+
+  "<ClipStack-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/Modules/ClipStack.swiftmodule"]
+    outputs: ["<ClipStack-arm64-apple-macosx26.0-debug.module>"]
+
+  "C.ClipStack-arm64-apple-macosx26.0-debug.exe":
+    tool: shell
+    inputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.product/Objects.LinkFileList"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/ClipStack"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-L","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug","-o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack","-module-name","ClipStack","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_ClipStack_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Library/Developer/CommandLineTools/usr/lib/swift-5.5/macosx","-target","arm64-apple-macosx11.0","-Xlinker","-add_ast_path","-Xlinker","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/Modules/ClipStack.swiftmodule","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g"]
+
+  "C.ClipStack-arm64-apple-macosx26.0-debug.exe-entitlements":
+    tool: shell
+    inputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack-entitlement.plist"]
+    outputs: ["<ClipStack-arm64-apple-macosx26.0-debug.exe-CodeSigning>"]
+    description: "Applying debug entitlements to ./.build/arm64-apple-macosx/debug/ClipStack"
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack-entitlement.plist","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack"]
+
+  "C.ClipStack-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift","/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift","/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift","/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift","/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/DerivedSources/resource_bundle_accessor.swift","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt","<ClipStack-arm64-apple-macosx26.0-debug.module-resources>","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/sources"]
+    outputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swift.o","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/Modules/ClipStack.swiftmodule"]
+    description: "Compiling Swift Module 'ClipStack' (11 sources)"
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-module-name","ClipStack","-emit-dependencies","-emit-module","-emit-module-path","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/Modules/ClipStack.swiftmodule","-output-file-map","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/output-file-map.json","-incremental","-c","@/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/sources","-I","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx11.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE","-module-cache-path","/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","ClipStack_main","-color-diagnostics","-swift-version","5","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g","-Xcc","-isysroot","-Xcc","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-Xcc","-fPIC","-Xcc","-g"]
+
+  "ClipStack-arm64-apple-macosx26.0-debug.module-resources":
+    tool: phony
+    inputs: ["/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack_ClipStack.bundle/ClipStackDataModel.xcdatamodeld/"]
+    outputs: ["<ClipStack-arm64-apple-macosx26.0-debug.module-resources>"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/rukesh/Development/Clipboard/Sources/","/Users/rukesh/Development/Clipboard/Package.swift","/Users/rukesh/Development/Clipboard/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

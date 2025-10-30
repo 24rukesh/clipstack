@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler" version="2000" minimumToolsVersion="Automatic" fromEntity="YES" fromTemplate="NO" fromSelection="NO" fromUndo="NO" fromPasteboard="NO" fromSearch="NO">
+    <entity name="ClipboardItemEntity" representedClassName="ClipboardItemEntity" syncable="YES">
+        <attribute name="type" attributeType="String" required="YES"/>
+        <attribute name="content" attributeType="String" optional="YES"/>
+        <attribute name="timestamp" attributeType="Date" required="YES"/>
+        <attribute name="identifier" attributeType="String" required="YES"/>
+    </entity>
+</model>

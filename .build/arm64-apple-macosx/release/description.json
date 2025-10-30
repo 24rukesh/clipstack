@@ -1,0 +1,536 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+    "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack_ClipStack.bundle/ClipStackDataModel.xcdatamodeld" : {
+      "inputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipStackDataModel.xcdatamodeld"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "directory",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack_ClipStack.bundle/ClipStackDataModel.xcdatamodeld"
+        }
+      ]
+    }
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ClipStack-arm64-apple-macosx26.0-release.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/sources",
+      "importPath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/LoginItemManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/Notifier.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/OnboardingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/PermissionsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/PreferencesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ShortcutManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<ClipStack-arm64-apple-macosx26.0-release.module-resources>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "ClipStack",
+      "moduleOutputPath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/Modules/ClipStack.swiftmodule",
+      "objects" : [
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/AppDelegate.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipStackApp.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardHistoryView.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItem.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemView.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardMonitor.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/CoreDataManager.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/GlobalShortcutMonitor.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/LoginItemManager.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/Notifier.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/OnboardingView.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PermissionsView.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PreferencesView.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ShortcutManager.swift.o",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/resource_bundle_accessor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx11.0",
+        "-whole-module-optimization",
+        "-num-threads",
+        "8",
+        "-serialize-diagnostics",
+        "-O",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+        "-module-cache-path",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "ClipStack_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipStackApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardHistoryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/CoreDataManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/GlobalShortcutMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/LoginItemManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/Notifier.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/OnboardingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PermissionsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PreferencesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ShortcutManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/Modules/ClipStack.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/LoginItemManager.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/Notifier.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/OnboardingView.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/PermissionsView.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/PreferencesView.swift",
+        "/Users/rukesh/Development/Clipboard/Sources/ShortcutManager.swift",
+        "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/DerivedSources/resource_bundle_accessor.swift"
+      ],
+      "tempsPath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build",
+      "wholeModuleOptimization" : true
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ClipStack" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "ClipStack",
+      "-c",
+      "/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/LoginItemManager.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/Notifier.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/OnboardingView.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/PermissionsView.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/PreferencesView.swift",
+      "/Users/rukesh/Development/Clipboard/Sources/ShortcutManager.swift",
+      "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/DerivedSources/resource_bundle_accessor.swift",
+      "-I",
+      "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/Modules",
+      "-target",
+      "arm64-apple-macosx11.0",
+      "-whole-module-optimization",
+      "-num-threads",
+      "8",
+      "-serialize-diagnostics",
+      "-O",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+      "-module-cache-path",
+      "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "ClipStack_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ClipStack" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/LoginItemManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/Notifier.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/OnboardingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/PermissionsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/PreferencesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Sources/ShortcutManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/DerivedSources/resource_bundle_accessor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/sources"
+    },
+    "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipStackApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardHistoryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemEntity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardItemView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ClipboardMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/CoreDataManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/GlobalShortcutMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/LoginItemManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/Notifier.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/OnboardingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PermissionsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/PreferencesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/ShortcutManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.build/resource_bundle_accessor.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/ClipStack.product/Objects.LinkFileList"
+    },
+    "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/release/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}

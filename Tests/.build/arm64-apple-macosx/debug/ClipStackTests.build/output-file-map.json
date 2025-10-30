@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/master.swiftdeps"
+  },
+  "/Users/rukesh/Development/Clipboard/Tests/ClipStackTests.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.d",
+    "object": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.dia"
+  }
+}

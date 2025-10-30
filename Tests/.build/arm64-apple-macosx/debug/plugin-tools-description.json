@@ -1,0 +1,393 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.xctest/Contents/MacOS/ClipStackTestsPackageTests",
+      "packagePath" : "/Users/rukesh/Development/Clipboard/Tests",
+      "productName" : "ClipStackTestsPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ClipStackTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/sources",
+      "importPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/ClipStackTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "ClipStackTests",
+      "moduleOutputPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules/ClipStackTests.swiftmodule",
+      "objects" : [
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx11.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules/ClipStackTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/rukesh/Development/Clipboard/Tests/ClipStackTests.swift"
+      ],
+      "tempsPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.ClipStackTestsPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/sources",
+      "importPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules/ClipStackTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "ClipStackTestsPackageTests",
+      "moduleOutputPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules/ClipStackTestsPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx11.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/include/ClipStackTestsPackageTests-Swift.h",
+        "-color-diagnostics",
+        "-I",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-L",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-plugin-path",
+        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules/ClipStackTestsPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ClipStackTests" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "ClipStackTests",
+      "-c",
+      "/Users/rukesh/Development/Clipboard/Tests/ClipStackTests.swift",
+      "-I",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx11.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ],
+    "ClipStackTestsPackageTests" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "ClipStackTestsPackageTests",
+      "-c",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx11.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/include/ClipStackTestsPackageTests-Swift.h",
+      "-color-diagnostics",
+      "-I",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-L",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-plugin-path",
+      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ClipStackTests" : [
+
+    ],
+    "ClipStackTestsPackageTests" : [
+      "ClipStackTests"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/ClipStackTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/sources"
+    },
+    "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/sources"
+    },
+    "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTests.build/ClipStackTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.build/runner.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/ClipStackTestsPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/rukesh/Development/Clipboard/Tests/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}

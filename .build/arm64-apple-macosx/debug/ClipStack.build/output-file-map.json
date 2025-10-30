@@ -1,0 +1,82 @@
+{
+  "": {
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/master.swiftdeps"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/AppDelegate.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/AppDelegate.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipStackApp.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipStackApp.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardHistoryView.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardHistoryView.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardItem.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItem.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity+CoreDataProperties.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity+CoreDataProperties.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemEntity.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemEntity.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardItemView.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardItemView.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/ClipboardMonitor.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/ClipboardMonitor.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/CoreDataManager.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/CoreDataManager.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/Sources/GlobalShortcutMonitor.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/GlobalShortcutMonitor.dia"
+  },
+  "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/DerivedSources/resource_bundle_accessor.swift": {
+    "dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.d",
+    "object": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swift.o",
+    "swiftmodule": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.swiftdeps",
+    "diagnostics": "/Users/rukesh/Development/Clipboard/.build/arm64-apple-macosx/debug/ClipStack.build/resource_bundle_accessor.dia"
+  }
+}
