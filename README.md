@@ -35,12 +35,18 @@ Open the installer (`ClipStack.pkg`) and follow the prompts. The app is installe
 
 ## ✨ Features
 
-* ✅ **Menu Bar Native:** Lives in your menu bar, always one click away.
-* ✅ **Instant Search:** Find any text clip instantly.
-* ✅ **One-Click Copy:** Simple "Copy" button with "Copied" confirmation.
-* ✅ **Notifications:** Optional "Saved" and "Copied" alerts.
-* ✅ **Start at Login:** Runs automatically (macOS 13+).
-* ✅ **Private by Design:** All data is stored 100% locally.
+- **Menu Bar Native:** Lives in your menu bar, always one click away.
+- **Clipboard History:** Captures text and images, saved locally.
+- **Instant Search:** Case‑insensitive filtering for fast find.
+- **One‑Click Copy:** Clear “Copy” button with “Copied” feedback and smooth auto‑close.
+- **Inline Preferences:** Gear icon toggles preferences inside the popover.
+- **Start at Login (macOS 13+):** Enable via Preferences or onboarding.
+- **Notifications (opt‑in):** “Saved” and “Copied” confirmations.
+- **Auto‑Scroll:** New items appear at top; list anchors to the first result.
+- **Clear All:** Quickly wipe history from the header.
+- **Screenshot Auto‑Import:** Detects native screenshots in your configured folder and copies them to the clipboard + adds to history.
+- **Privacy by Design:** 100% local storage via Core Data (sandboxed).
+- **Easy Install:** PKG installer or zipped app bundle.
 
 ## ⚙️ How to Use
 
