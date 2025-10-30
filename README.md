@@ -4,8 +4,6 @@ Fast, private, and simple clipboard history that lives in your menu bar. Search,
 
 ---
 
-![A screenshot or GIF showing ClipStack in action.](https://via.placeholder.com/900x450.png?text=Add+a+Screenshot+or+GIF+of+ClipStack+Here)
-
 <p align="center">
   <img alt="macOS" src="https://img.shields.io/badge/macOS-11.0%2B-blue?logo=apple">
   <img alt="Swift" src="https://img.shields.io/badge/Swift-5-orange?logo=swift">
