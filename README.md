@@ -17,16 +17,16 @@ Fast, private, and simple clipboard history that lives in your menu bar. Search,
 ## 🚀 Download & Quick Start
 
 ### 1. Download
-[**➡️ Download the latest `ClipStack.dmg` from Releases**](https://github.com/24rukesh/clipstack/releases/latest/download/ClipStack.dmg)
+[**➡️ Download the latest `ClipStack.pkg` from Releases**](https://github.com/24rukesh/clipstack/releases/latest/download/ClipStack.pkg)
 
 ### 2. Install
-Drag `ClipStack.app` to your `/Applications` folder.
+Open the installer (`ClipStack.pkg`) and follow the prompts. The app is installed to `/Applications`.
 
 ### 3. First Run
-⚠️ **If macOS warns that the app can’t be opened:**
+⚠️ **If macOS warns about opening the installer:**
 
 > **Method 1 (Easiest):**
-> In Finder, **Right‑click** `ClipStack.app` → select **Open** → click **Open** in the dialog.
+> In Finder, **Right‑click** `ClipStack.pkg` → select **Open** → click **Open** in the dialog.
 >
 > **Method 2 (Terminal):**
 > `xattr -dr com.apple.quarantine /Applications/ClipStack.app`
