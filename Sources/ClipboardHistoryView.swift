@@ -120,8 +120,8 @@ struct ClipboardHistoryView: View {
         Notifier.requestAuthorization()
         // Show system notification
         Notifier.notify(title: "Copied to Clipboard", body: item.type == .text ? (item.previewText) : "Image copied")
-        // Delay popover closing until after the copied button text appears
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        // Delay popover closing until after the copied button text appears (reduced to 1.0s)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             onClose?()
         }
     }

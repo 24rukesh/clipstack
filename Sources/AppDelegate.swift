@@ -55,9 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let showItem = NSMenuItem(title: "Show Clipboard History", action: #selector(showClipboardHistory), keyEquivalent: "")
         showItem.target = self
         statusMenu.addItem(showItem)
-        let prefsItem = NSMenuItem(title: "Preferences…", action: #selector(openPreferences), keyEquivalent: ",")
-        prefsItem.target = self
-        statusMenu.addItem(prefsItem)
         statusMenu.addItem(NSMenuItem.separator())
         let quitItem = NSMenuItem(title: "Quit ClipStack", action: #selector(quitApp), keyEquivalent: "q")
         quitItem.target = self
