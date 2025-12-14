@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Initialize monitors FIRST so views have valid references
         clipboardMonitor = ClipboardMonitor()
-        // Shortcut removed per request; do not initialize
+        globalShortcutMonitor = GlobalShortcutMonitor(appDelegate: self)
 
         // Request notification permission early
         _ = Notifier.shared // ensure delegate is set
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Start monitoring services
         clipboardMonitor.startMonitoring()
-        // Shortcut removed: do not register any global hotkey on launch
+        globalShortcutMonitor.startMonitoring()
 
         // Show onboarding on first launch
         if !UserDefaults.standard.bool(forKey: "hasOnboarded") {
@@ -66,7 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         
         // Set the content view and provide a close handler
-        let historyView = ClipboardHistoryView(clipboardMonitor: clipboardMonitor, onClose: { [weak self] in
+        let historyView = ClipboardHistoryView(clipboardMonitor: clipboardMonitor, globalShortcutMonitor: globalShortcutMonitor, onClose: { [weak self] in
             self?.popover.performClose(nil)
             self?.anchorWindow?.orderOut(nil)
             self?.anchorWindow = nil
@@ -86,12 +86,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func showClipboardHistory() {
+        NSApp.activate(ignoringOtherApps: true)
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
 
     func showClipboardHistoryAtMouse() {
+        NSApp.activate(ignoringOtherApps: true)
         let mouse = NSEvent.mouseLocation
         let rect = NSRect(x: mouse.x, y: mouse.y, width: 1, height: 1)
         let win = NSWindow(contentRect: rect, styleMask: .borderless, backing: .buffered, defer: false)

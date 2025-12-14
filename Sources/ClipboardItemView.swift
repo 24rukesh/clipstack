@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ClipboardItemView: View {
     let item: ClipboardItem
+    var isSelected: Bool = false
     var onCopy: (() -> Void)? = nil
     @State private var isCopied = false
     
@@ -10,20 +11,21 @@ struct ClipboardItemView: View {
             switch item.type {
             case .text:
                 Image(systemName: "text.alignleft")
-                    .foregroundColor(.blue)
+                    .foregroundColor(isSelected ? .white : .blue)
             case .image:
                 Image(systemName: "photo")
-                    .foregroundColor(.green)
+                    .foregroundColor(isSelected ? .white : .green)
             }
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(item.previewText)
                     .font(.body)
                     .lineLimit(2)
+                    .foregroundColor(isSelected ? .white : .primary)
                 
                 Text(item.formattedTimestamp)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(isSelected ? .white.opacity(0.8) : .secondary)
                 
                 HStack {
                     Button(action: {
@@ -37,7 +39,8 @@ struct ClipboardItemView: View {
                             .font(.caption)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 5)
-                            .background(Color.gray.opacity(0.2))
+                            .background(isCopied ? Color.green : (isSelected ? Color.white.opacity(0.2) : Color.gray.opacity(0.2)))
+                            .foregroundColor(isSelected ? .white : .primary)
                             .cornerRadius(6)
                     }
                     .buttonStyle(PlainButtonStyle())
@@ -49,5 +52,8 @@ struct ClipboardItemView: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 8)
+        .padding(.horizontal, 8)
+        .background(isSelected ? Color.accentColor : Color.clear)
+        .cornerRadius(8)
     }
 }

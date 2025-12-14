@@ -21,9 +21,21 @@ cp -r .build/release/ClipStack build/ClipStack.app/Contents/MacOS/
 # Copy Info.plist
 cp Sources/Info.plist build/ClipStack.app/Contents/
 
-# Compile Core Data model into .momd and include in Resources
+# Compile Core Data model or copy bundle
 if [ -d "Sources/ClipStackDataModel.xcdatamodeld" ]; then
-  xcrun momc Sources/ClipStackDataModel.xcdatamodeld build/ClipStack.app/Contents/Resources/ClipStackDataModel.momd
+  if xcrun momc Sources/ClipStackDataModel.xcdatamodeld build/ClipStack.app/Contents/Resources/ClipStackDataModel.momd 2>/dev/null; then
+    echo "Packaged Core Data model: build/ClipStack.app/Contents/Resources/ClipStackDataModel.momd"
+  else
+    echo "Warning: 'momc' not found. Attempting to copy resource bundle from SwiftPM build..."
+    if [ -d ".build/release/ClipStack_ClipStack.bundle" ]; then
+       # Copy the bundle content directly into Resources if possible, or copy the bundle itself.
+       # Usually bundle loading finds it if packaged as a bundle.
+       cp -r .build/release/ClipStack_ClipStack.bundle build/ClipStack.app/Contents/Resources/
+       echo "Copied ClipStack_ClipStack.bundle to Resources."
+    else
+       echo "Error: Could not find compiled model or resource bundle. App may crash."
+    fi
+  fi
 fi
 
 echo "Packaged Core Data model: build/ClipStack.app/Contents/Resources/ClipStackDataModel.momd"
