@@ -14,13 +14,10 @@
 ## 🚀 Download & Install
 
 ### Option 1: Installer (Recommended)
-1.  **[Download the latest `ClipStack.pkg`](https://github.com/24rukesh/clipstack/releases/latest/download/ClipStack.pkg)**.
-2.  Open the installer and follow the prompts.
+1.  **[Download the latest release](https://github.com/24rukesh/clipstack/releases/latest)**.
+2.  Download `ClipStack.pkg` (Installer) or `ClipStack.app.zip` (Portable) from the Assets section.
+3.  Open the installer and follow the prompts.
     > _Note: If macOS prevents opening the installer, **Right-click** the file and select **Open**._
-
-### Option 2: Portable App
-1.  **[Download `ClipStack.app.zip`](https://github.com/24rukesh/clipstack/releases/latest/download/ClipStack.app.zip)**.
-2.  Unzip and drag `ClipStack.app` to your **Applications** folder.
 
 ---
 
