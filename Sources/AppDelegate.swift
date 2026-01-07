@@ -12,6 +12,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var preferencesWindow: NSWindow?
     var onboardingWindow: NSWindow?
     
+    var lastActiveApplication: NSRunningApplication?
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Initialize monitors FIRST so views have valid references
         clipboardMonitor = ClipboardMonitor()
@@ -34,6 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    var eventMonitor: EventMonitor?
+
     func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
@@ -63,15 +67,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create popover for clipboard history
         popover = NSPopover()
         popover.contentSize = NSSize(width: 300, height: 400)
-        popover.behavior = .transient
+        popover.behavior = .semitransient
         
         // Set the content view and provide a close handler
-        let historyView = ClipboardHistoryView(clipboardMonitor: clipboardMonitor, globalShortcutMonitor: globalShortcutMonitor, onClose: { [weak self] in
-            self?.popover.performClose(nil)
-            self?.anchorWindow?.orderOut(nil)
-            self?.anchorWindow = nil
+        let historyView = ClipboardHistoryView(clipboardMonitor: clipboardMonitor, globalShortcutMonitor: globalShortcutMonitor, appDelegate: self, onClose: { [weak self] in
+            self?.closePopover(nil)
         })
         popover.contentViewController = NSHostingController(rootView: historyView)
+        
+        // Initialize EventMonitor to close popover on outside clicks
+        eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+            if let self = self, self.popover.isShown {
+                 self.closePopover(event)
+            }
+        }
     }
     
     @objc func statusBarButtonClicked() {
@@ -86,13 +95,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func showClipboardHistory() {
+        // Capture the current frontmost app before we activate ourselves
+        if let currentApp = NSWorkspace.shared.frontmostApplication {
+             if currentApp.bundleIdentifier != Bundle.main.bundleIdentifier {
+                lastActiveApplication = currentApp
+                print("[ClipStack] Captured last active app: \(currentApp.localizedName ?? "Unknown")")
+             }
+        }
+        
         NSApp.activate(ignoringOtherApps: true)
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            eventMonitor?.start()
         }
     }
 
     func showClipboardHistoryAtMouse() {
+        // Capture the current frontmost app before we activate ourselves
+        if let currentApp = NSWorkspace.shared.frontmostApplication {
+             if currentApp.bundleIdentifier != Bundle.main.bundleIdentifier {
+                lastActiveApplication = currentApp
+                print("[ClipStack] Captured last active app (mouse): \(currentApp.localizedName ?? "Unknown")")
+             }
+        }
+        
         NSApp.activate(ignoringOtherApps: true)
         let mouse = NSEvent.mouseLocation
         let rect = NSRect(x: mouse.x, y: mouse.y, width: 1, height: 1)
@@ -105,12 +131,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         anchorWindow = win
         if let view = win.contentView {
             popover.show(relativeTo: view.bounds, of: view, preferredEdge: .maxY)
+            eventMonitor?.start()
         }
+    }
+    
+    func activateLastApplication() {
+        if let app = lastActiveApplication {
+            print("[ClipStack] Activating last app: \(app.localizedName ?? "Unknown")")
+            app.activate(options: .activateIgnoringOtherApps)
+        } else {
+            print("[ClipStack] No last application to activate.")
+            NSApp.hide(nil) // Fallback: just hide ourselves to let the next app come forward
+        }
+    }
+    
+    // New helper to close popover and stop monitor
+    @objc func closePopover(_ sender: Any?) {
+        popover.performClose(sender)
+        anchorWindow?.orderOut(sender)
+        anchorWindow = nil
+        eventMonitor?.stop()
     }
     
     func toggleClipboardHistory() {
         if popover.isShown {
-            popover.performClose(nil)
+            closePopover(nil)
         } else {
             showClipboardHistory()
         }

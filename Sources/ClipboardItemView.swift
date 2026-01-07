@@ -4,6 +4,7 @@ struct ClipboardItemView: View {
     let item: ClipboardItem
     var isSelected: Bool = false
     var onCopy: (() -> Void)? = nil
+    var onPaste: (() -> Void)? = nil
     @State private var isCopied = false
     
     var body: some View {
@@ -44,6 +45,23 @@ struct ClipboardItemView: View {
                             .cornerRadius(6)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
+                    Button(action: {
+                        onPaste?()
+                    }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "arrow.turn.up.left")
+                            Text("Paste")
+                        }
+                        .font(.caption)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(6)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
                     Spacer()
                 }
                 .padding(.top, 2)

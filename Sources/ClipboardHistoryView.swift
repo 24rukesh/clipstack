@@ -4,6 +4,7 @@ import Carbon
 struct ClipboardHistoryView: View {
     @ObservedObject var clipboardMonitor: ClipboardMonitor
     @ObservedObject var globalShortcutMonitor: GlobalShortcutMonitor
+    weak var appDelegate: AppDelegate? // Weak reference to avoid retain cycle
     @State private var searchText = ""
     var onClose: (() -> Void)?
     @State private var showPreferencesInline = false
@@ -104,11 +105,25 @@ struct ClipboardHistoryView: View {
             // Clipboard history list with auto-scroll to top on updates
             ScrollViewReader { proxy in
                 List(filteredHistory) { item in
-                    ClipboardItemView(item: item, isSelected: selectedId == item.id, onCopy: {
+                    ClipboardItemView(item: item, isSelected: selectedId == item.id, 
+                    onCopy: {
+                        copyToClipboard(item)
+                    }, 
+                    onPaste: {
                         pasteItem(item)
                     })
+                    .onDrag {
+                        print("[ClipStack] onDrag started for item: \(item.previewText)")
+                        if let content = item.content {
+                            return NSItemProvider(object: content as NSString)
+                        } else if let imageData = item.imageData, let image = NSImage(data: imageData) {
+                            return NSItemProvider(object: image)
+                        }
+                        return NSItemProvider()
+                    }
                     .id(item.id)
                     .onTapGesture {
+                        print("[ClipStack] onTapGesture triggered")
                         selectedId = item.id
                     }
                 }
@@ -236,7 +251,7 @@ struct ClipboardHistoryView: View {
         selectedId = items[newIndex].id
     }
     
-    private func pasteItem(_ item: ClipboardItem) {
+    private func copyToClipboard(_ item: ClipboardItem) {
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         
@@ -250,14 +265,54 @@ struct ClipboardHistoryView: View {
                 _ = pasteboard.writeObjects([image])
             }
         }
+    }
+
+    private func pasteItem(_ item: ClipboardItem) {
+        // First copy to clipboard
+        copyToClipboard(item)
         
-        // Ensure notification permission and show system notification
-        Notifier.requestAuthorization()
-        // Show system notification
-        Notifier.notify(title: "Copied to Clipboard", body: item.type == .text ? (item.previewText) : "Image copied")
-        // Delay popover closing until after the copied button text appears
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            onClose?()
+        // Notify user locally if needed, but primarily we want to paste
+        // We close the window first to return focus to the previous app
+        onClose?()
+        
+        // Explicitly activate the last application to ensure focus
+        if let appDelegate = appDelegate {
+            print("[ClipStack] Using passed AppDelegate, calling activateLastApplication")
+            appDelegate.activateLastApplication()
+        } else if let appDelegate = NSApp.delegate as? AppDelegate {
+            print("[ClipStack] Cast NSApp.delegate, calling activateLastApplication")
+             appDelegate.activateLastApplication()
+        } else {
+            print("[ClipStack] ERROR: Could not find AppDelegate")
         }
+        
+        // Small delay to allow window to close and focus to return
+        // Increased to 0.6s to ensure reliable focus switching
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.pasteToCurrentApplication()
+        }
+    }
+    
+    private func pasteToCurrentApplication() {
+        print("[ClipStack] Attempting to paste to current application...")
+        let source = CGEventSource(stateID: .combinedSessionState)
+        
+        guard let cmdDown = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: true),
+              let vDown = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: true),
+              let vUp = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: false),
+              let cmdUp = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: false) else {
+            print("[ClipStack] Failed to create CGEvent for paste.")
+            return
+        }
+        
+        cmdDown.flags = .maskCommand
+        vDown.flags = .maskCommand
+        vUp.flags = .maskCommand
+        
+        cmdDown.post(tap: .cghidEventTap)
+        vDown.post(tap: .cghidEventTap)
+        vUp.post(tap: .cghidEventTap)
+        cmdUp.post(tap: .cghidEventTap)
+        print("[ClipStack] Paste events posted.")
     }
 }
