@@ -59,4 +59,34 @@ struct ClipboardItem: Identifiable, Codable {
         formatter.timeStyle = .short
         return formatter.string(from: timestamp)
     }
+    
+    // Check if content is a hex color
+    var detectedColor: Color? {
+        guard type == .text, let text = content else { return nil }
+        
+        let hex = text.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        guard hex.count == 6 || hex.count == 3 || hex.count == 8 else { return nil }
+        
+        let scanner = Scanner(string: hex)
+        var rgbValue: UInt64 = 0
+        
+        if scanner.scanHexInt64(&rgbValue) {
+            let r, g, b, a: Double
+            if hex.count == 6 {
+                r = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+                g = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+                b = Double(rgbValue & 0x0000FF) / 255.0
+                a = 1.0
+            } else if hex.count == 8 {
+                r = Double((rgbValue & 0xFF000000) >> 24) / 255.0
+                g = Double((rgbValue & 0x00FF0000) >> 16) / 255.0
+                b = Double((rgbValue & 0x0000FF00) >> 8) / 255.0
+                a = Double(rgbValue & 0x000000FF) / 255.0
+            } else {
+                return nil
+            }
+            return Color(red: r, green: g, blue: b, opacity: a)
+        }
+        return nil
+    }
 }
