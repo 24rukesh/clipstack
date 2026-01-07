@@ -19,6 +19,12 @@
 3.  Open the installer and follow the prompts.
     > _Note: If macOS prevents opening the installer, **Right-click** the file and select **Open**._
 
+### Accessibility Permissions (Important)
+To support **Auto-Paste** features (like clicking a bubble to paste), ClipStack requires Accessibility permissions.
+1.  On first use, an alert will verify these permissions.
+2.  If prompted, click **Open Settings** and enable ClipStack under "Accessibility".
+
+
 ---
 
 ## ✨ Features
@@ -29,6 +35,8 @@
 *   **🎹 Configurable Hotkey:** Default `Cmd + Shift + V`. Customize it in Preferences to whatever fits your workflow.
 *   **🖼️ Rich Content:** Supports text, code, and images.
 *   **🚀 Auto-Start:** Optional "Start at Login" (macOS 13+).
+*   **🥞 Paste Stack:** Copy multiple items to see a floating stack.
+*   **👆 Click-to-Paste:** Click any floating bubble to paste instantly.
 *   **🔒 Private by Design:** 
     *   All data is stored locally using Core Data (sandboxed).
     *   **No** internet access.
@@ -41,7 +49,12 @@
 2.  **Navigate:** Use `Up` / `Down` arrow keys to select a clip.
 3.  **Paste:** Press `Enter` to copy the selected item to your clipboard and paste it immediately (if supported).
 4.  **Search:** Just start typing! The list filters automatically.
-5.  **Preferences:** Click the gear icon inside the app to toggle "Start at Login" or record a new Global Hotkey.
+5.  **Paste Stack (New):**
+    *   Copy multiple items quickly.
+    *   A stack of "bubbles" will appear in the corner.
+    *   **Click** any bubble to paste that item immediately.
+    *   *Note: Requires Accessibility Permissions to function.*
+6.  **Preferences:** Click the gear icon inside the app to toggle "Start at Login" or record a new Global Hotkey.
 
 ## 🏗️ Build from Source
 
