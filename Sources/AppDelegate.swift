@@ -200,7 +200,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func performPaste(item: ClipboardItem) {
         
         // Check Accessibility Permissions
+        print("[ClipStack] Checking AXIsProcessTrusted...")
         if !AXIsProcessTrusted() {
+            print("[ClipStack] AXIsProcessTrusted is false. Prompting user.")
             DispatchQueue.main.async {
                 let alert = NSAlert()
                 alert.messageText = "Accessibility Permissions Required"
@@ -214,6 +216,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             return
         }
+        print("[ClipStack] AXIsProcessTrusted is true. Proceeding to paste.")
 
         // 1. Ensure content is on pasteboard
         let pasteboard = NSPasteboard.general
@@ -240,14 +243,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func simulatePasteCommand() {
-        // Use hidSystemState for more reliable "physical" simulation
-        let source = CGEventSource(stateID: .hidSystemState)
+        print("[ClipStack] simulatePasteCommand() called")
+        // Use combinedSessionState for better reliability with user session apps
+        let source = CGEventSource(stateID: .combinedSessionState)
         
         // Cmd = 0x37, V = 0x09
         guard let cmdDown = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: true),
               let vDown = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: true),
               let vUp = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: false),
               let cmdUp = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: false) else {
+            print("[ClipStack] Failed to create CGEvents for paste")
             return
         }
         
@@ -260,6 +265,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         vDown.post(tap: .cghidEventTap)
         vUp.post(tap: .cghidEventTap)
         cmdUp.post(tap: .cghidEventTap)
+        print("[ClipStack] Posted Cmd+V events")
     }
     
     func updateStackLayout() {
