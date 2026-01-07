@@ -59,6 +59,9 @@ class ClipboardMonitor: ObservableObject {
         }
     }
     
+    // Closure to notify delegate (AppDelegate) of new items
+    var onNewItem: ((ClipboardItem) -> Void)?
+
     private func addClipboardItem(_ item: ClipboardItem) {
         // Add to the beginning of the history
         clipboardHistory.insert(item, at: 0)
@@ -72,6 +75,11 @@ class ClipboardMonitor: ObservableObject {
         saveHistory()
 
         // Notify that a new item was saved
+        // Trigger the Floating Panel Bubble instead of system notification
+        onNewItem?(item)
+        
+        /* 
+        // Old Notification Logic - Disabled for Phase 2 Bubble
         switch item.type {
         case .text:
             let preview = item.previewText
@@ -79,6 +87,7 @@ class ClipboardMonitor: ObservableObject {
         case .image:
             Notifier.notify(title: "Saved to ClipStack", body: "Image saved")
         }
+        */
     }
 
     // MARK: - Screenshot Watchers

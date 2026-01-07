@@ -37,9 +37,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     var eventMonitor: EventMonitor?
+    
+    // Phase 2: Capture Bubble
+    // Phase 2 & 3: Capture Bubble Stack
+    var visiblePanels: [FloatingPanel] = []
+    // var bubbleTimer: Timer? // Now managed individually by panels
 
     func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        
+        // Hook up Monitor
+        clipboardMonitor.onNewItem = { [weak self] item in
+            DispatchQueue.main.async {
+                self?.showCaptureBubble(for: item)
+            }
+        }
         
         if let button = statusItem.button {
             if let image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "ClipStack") {
@@ -138,11 +150,155 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func activateLastApplication() {
         if let app = lastActiveApplication {
-            print("[ClipStack] Activating last app: \(app.localizedName ?? "Unknown")")
+            // print("[ClipStack] Activating last app: \(app.localizedName ?? "Unknown")")
             app.activate(options: .activateIgnoringOtherApps)
         } else {
             print("[ClipStack] No last application to activate.")
             NSApp.hide(nil) // Fallback: just hide ourselves to let the next app come forward
+        }
+    }
+    
+    func showCaptureBubble(for item: ClipboardItem) {
+        // 0. Capture current app
+        if let currentApp = NSWorkspace.shared.frontmostApplication {
+             if currentApp.bundleIdentifier != Bundle.main.bundleIdentifier {
+                lastActiveApplication = currentApp
+             }
+        }
+        
+        // 1. Enforce Max Limit (e.g., 5)
+        // If we already have 5, remove the *oldest* (which is at index 0 in our tracking, or top visually)
+        if visiblePanels.count >= 5 {
+            let oldest = visiblePanels.removeFirst()
+            oldest.close()
+        }
+        
+        // 2. Create Panel (initially off-screen or at target position)
+        // We'll calculate the exact position in updateStackLayout, so just start at zero
+        let panel = FloatingPanel(contentRect: .zero, item: item, appDelegate: self)
+        
+        // 3. Add to stack
+        visiblePanels.append(panel)
+        
+        // 4. Show and Start Timer
+        panel.makeKeyAndOrderFront(nil)
+        panel.startAutoCloseTimer(duration: 8.0)
+        
+        // 5. Update Layout
+        updateStackLayout()
+        
+        // 6. Monitor closing
+        panel.onCloseCallback = { [weak self] closedPanel in
+            guard let self = self else { return }
+            if let index = self.visiblePanels.firstIndex(of: closedPanel) {
+                self.visiblePanels.remove(at: index)
+                self.updateStackLayout()
+            }
+        }
+    }
+    
+    func performPaste(item: ClipboardItem) {
+        
+        // Check Accessibility Permissions
+        if !AXIsProcessTrusted() {
+            DispatchQueue.main.async {
+                let alert = NSAlert()
+                alert.messageText = "Accessibility Permissions Required"
+                alert.informativeText = "ClipStack needs accessibility permissions to paste automatically. Please check System Settings."
+                alert.addButton(withTitle: "Open Settings")
+                alert.addButton(withTitle: "Cancel")
+                if alert.runModal() == .alertFirstButtonReturn {
+                    let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
+                    NSWorkspace.shared.open(url)
+                }
+            }
+            return
+        }
+
+        // 1. Ensure content is on pasteboard
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        
+        switch item.type {
+        case .text:
+            if let content = item.content {
+                pasteboard.setString(content, forType: .string)
+            }
+        case .image:
+            if let data = item.imageData, let image = NSImage(data: data) {
+                _ = pasteboard.writeObjects([image])
+            }
+        }
+        
+        // 2. FORCE Activate previous app
+        self.activateLastApplication()
+        
+        // 3. Simulate Cmd+V with delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.simulatePasteCommand()
+        }
+    }
+    
+    private func simulatePasteCommand() {
+        // Use hidSystemState for more reliable "physical" simulation
+        let source = CGEventSource(stateID: .hidSystemState)
+        
+        // Cmd = 0x37, V = 0x09
+        guard let cmdDown = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: true),
+              let vDown = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: true),
+              let vUp = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: false),
+              let cmdUp = CGEvent(keyboardEventSource: source, virtualKey: 0x37, keyDown: false) else {
+            return
+        }
+        
+        cmdDown.flags = .maskCommand
+        vDown.flags = .maskCommand
+        vUp.flags = .maskCommand
+        
+        // Post events
+        cmdDown.post(tap: .cghidEventTap)
+        vDown.post(tap: .cghidEventTap)
+        vUp.post(tap: .cghidEventTap)
+        cmdUp.post(tap: .cghidEventTap)
+    }
+    
+    func updateStackLayout() {
+        guard let screen = NSScreen.main else { return }
+        let visibleFrame = screen.visibleFrame
+        let panelHeight: CGFloat = 80
+        let gap: CGFloat = 10
+        let rightPadding: CGFloat = 20
+        let bottomPadding: CGFloat = 20
+        
+        // Layout Strategy:
+        // Index 0 (Oldest) -> Highest Y
+        // Index Last (Newest) -> Lowest Y (Bottom)
+        // Actually, typically notifications stack UP from bottom.
+        // Newest at Bottom.
+        
+        // Iterating backwards (Newest first) might be easier to visualize "stacking up"
+        // Let y = bottomPadding
+        // For each panel (reversed):
+        //   set frame to y
+        //   y += height + gap
+        
+        var currentY = visibleFrame.minY + bottomPadding
+        
+        // We want the newest (last in array) to be at the bottom? 
+        // Or newest at top?
+        // User agreed: "Newest at Bottom-Right. Older ones slide UP."
+        // So `visiblePanels.last` should be at `bottomPadding`.
+        // `visiblePanels.first` (oldest) should be high up.
+        
+        for panel in visiblePanels.reversed() {
+            let panelWidth: CGFloat = 240
+            let x = visibleFrame.maxX - panelWidth - rightPadding
+            let newFrame = NSRect(x: x, y: currentY, width: panelWidth, height: panelHeight)
+            
+            // Animate
+            panel.animator().setFrame(newFrame, display: true)
+            
+            currentY += panelHeight + gap
         }
     }
     

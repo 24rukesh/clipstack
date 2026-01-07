@@ -3,6 +3,7 @@ import SwiftUI
 struct FloatingClipView: View {
     let item: ClipboardItem
     var onClose: (() -> Void)? = nil
+    var onPaste: (() -> Void)? = nil
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -110,6 +111,11 @@ struct FloatingClipView: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.white.opacity(0.1), lineWidth: 1)
         )
+        // Click to Paste
+        .contentShape(Rectangle()) // Ensure the whole area is tappable
+        .onTapGesture {
+            onPaste?()
+        }
     }
 }
 

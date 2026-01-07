@@ -1,6 +1,8 @@
 import SwiftUI
 import Carbon
 
+import Carbon
+
 struct ClipboardHistoryView: View {
     @ObservedObject var clipboardMonitor: ClipboardMonitor
     @ObservedObject var globalShortcutMonitor: GlobalShortcutMonitor
