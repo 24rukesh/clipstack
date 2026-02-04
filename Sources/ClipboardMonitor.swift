@@ -13,6 +13,9 @@ class ClipboardMonitor: ObservableObject {
     private var screenshotLocationPath: String?
     private var screenshotPrefsTimer: Timer?
     
+    // Thread-safe queue for screenshot operations
+    private let screenshotQueue = DispatchQueue(label: "com.clipstack.screenshots", qos: .utility)
+    
     init() {
         // Load saved clipboard history
         loadHistory()
@@ -32,29 +35,30 @@ class ClipboardMonitor: ObservableObject {
         stopScreenshotWatchers()
         screenshotPrefsTimer?.invalidate()
         screenshotPrefsTimer = nil
+        AppLogger.clipboard.info("Clipboard monitoring stopped")
     }
     
     private func checkForNewContent() {
         let pasteboard = NSPasteboard.general
         let currentChangeCount = pasteboard.changeCount
         
-        if currentChangeCount != lastChangeCount {
-            lastChangeCount = currentChangeCount
-            
-            // Check if we have text content
-            if let text = pasteboard.string(forType: .string) {
-                addClipboardItem(.text(text))
-            }
-            // Check if we have image content
-            else if let image = pasteboard.readObjects(forClasses: [NSImage.self], options: nil)?.first as? NSImage {
-                // Prefer PNG data for storage and pasting
-                if let tiffData = image.tiffRepresentation,
-                   let rep = NSBitmapImageRep(data: tiffData),
-                   let pngData = rep.representation(using: .png, properties: [:]) {
-                    addClipboardItem(.imageData(pngData))
-                } else {
-                    addClipboardItem(.image(image))
-                }
+        // Only process if change count actually changed
+        guard currentChangeCount != lastChangeCount else { return }
+        lastChangeCount = currentChangeCount
+        
+        // Check if we have text content
+        if let text = pasteboard.string(forType: .string) {
+            addClipboardItem(.text(text))
+        }
+        // Check if we have image content
+        else if let image = pasteboard.readObjects(forClasses: [NSImage.self], options: nil)?.first as? NSImage {
+            // Prefer PNG data for storage and pasting
+            if let tiffData = image.tiffRepresentation,
+               let rep = NSBitmapImageRep(data: tiffData),
+               let pngData = rep.representation(using: .png, properties: [:]) {
+                addClipboardItem(.imageData(pngData))
+            } else {
+                addClipboardItem(.image(image))
             }
         }
     }
@@ -63,11 +67,22 @@ class ClipboardMonitor: ObservableObject {
     var onNewItem: ((ClipboardItem) -> Void)?
 
     private func addClipboardItem(_ item: ClipboardItem) {
+        // Input validation: check content size
+        if item.type == .text, let content = item.content, content.utf8.count > AppConstants.Limits.maxContentSize {
+            AppLogger.clipboard.warning("Skipping large text item (\(content.utf8.count) bytes > \(AppConstants.Limits.maxContentSize) limit)")
+            return
+        }
+        
+        if item.type == .image, let imageSize = item.imageData?.count, imageSize > AppConstants.Limits.maxContentSize * 10 {
+            AppLogger.clipboard.warning("Skipping large image (\(imageSize) bytes)")
+            return
+        }
+        
         // Add to the beginning of the history
         clipboardHistory.insert(item, at: 0)
         
-        // Limit history to 100 items
-        if clipboardHistory.count > 100 {
+        // Limit history to configured max
+        if clipboardHistory.count > AppConstants.Limits.maxHistoryItems {
             clipboardHistory.removeLast()
         }
         
@@ -77,17 +92,6 @@ class ClipboardMonitor: ObservableObject {
         // Notify that a new item was saved
         // Trigger the Floating Panel Bubble instead of system notification
         onNewItem?(item)
-        
-        /* 
-        // Old Notification Logic - Disabled for Phase 2 Bubble
-        switch item.type {
-        case .text:
-            let preview = item.previewText
-            Notifier.notify(title: "Saved to ClipStack", body: preview)
-        case .image:
-            Notifier.notify(title: "Saved to ClipStack", body: "Image saved")
-        }
-        */
     }
 
     // MARK: - Screenshot Watchers
@@ -109,22 +113,37 @@ class ClipboardMonitor: ObservableObject {
 
     private func addDirectoryWatchIfExists(_ path: String) {
         var isDir: ObjCBool = false
-        if FileManager.default.fileExists(atPath: path, isDirectory: &isDir), isDir.boolValue {
-            let fd = open(path, O_EVTONLY)
-            if fd >= 0 {
-                let source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fd, eventMask: .write, queue: DispatchQueue.global(qos: .utility))
-                source.setEventHandler { [weak self] in
-                    self?.scanForNewScreenshots(in: path)
-                }
-                source.setCancelHandler { [weak self] in
-                    if let idx = self?.screenshotWatchFDs.firstIndex(of: fd) { self?.screenshotWatchFDs.remove(at: idx) }
-                    close(fd)
-                }
-                screenshotWatchFDs.append(fd)
-                screenshotWatchSources.append(source)
-                source.resume()
-            }
+        guard FileManager.default.fileExists(atPath: path, isDirectory: &isDir), isDir.boolValue else {
+            return
         }
+        
+        let fd = open(path, O_EVTONLY)
+        guard fd >= 0 else {
+            AppLogger.screenshot.error("Failed to watch \(path): \(String(cString: strerror(errno)))")
+            return
+        }
+        
+        let source = DispatchSource.makeFileSystemObjectSource(
+            fileDescriptor: fd,
+            eventMask: .write,
+            queue: screenshotQueue
+        )
+        
+        source.setEventHandler { [weak self] in
+            self?.scanForNewScreenshots(in: path)
+        }
+        
+        source.setCancelHandler { [weak self] in
+            if let idx = self?.screenshotWatchFDs.firstIndex(of: fd) {
+                self?.screenshotWatchFDs.remove(at: idx)
+            }
+            close(fd)
+        }
+        
+        screenshotWatchFDs.append(fd)
+        screenshotWatchSources.append(source)
+        source.resume()
+        AppLogger.screenshot.debug("Started watching: \(path)")
     }
 
     private func stopScreenshotWatchers() {
@@ -137,22 +156,30 @@ class ClipboardMonitor: ObservableObject {
 
     private func scanForNewScreenshots(in path: String) {
         let url = URL(fileURLWithPath: path)
-        guard let items = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.contentModificationDateKey], options: [.skipsHiddenFiles]) else { return }
+        guard let items = try? FileManager.default.contentsOfDirectory(
+            at: url,
+            includingPropertiesForKeys: [.contentModificationDateKey],
+            options: [.skipsHiddenFiles]
+        ) else { return }
+        
         let screenshots = items.filter { u in
             let name = u.lastPathComponent.lowercased()
             return (name.hasPrefix("screenshot") || name.contains("screenshot")) && name.hasSuffix(".png")
         }
+        
         // Sort by modification date descending
         let sorted = screenshots.sorted { a, b in
             let da = (try? a.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date.distantPast
             let db = (try? b.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date.distantPast
             return da > db
         }
-        // Process the most recent few to be safe
-        for u in sorted.prefix(3) {
-            let path = u.path
-            if processedScreenshotPaths.contains(path) { continue }
-            processedScreenshotPaths.insert(path)
+        
+        // Process the most recent few
+        for u in sorted.prefix(AppConstants.Limits.screenshotScanLimit) {
+            let filePath = u.path
+            // Thread-safe check and insert
+            guard !processedScreenshotPaths.contains(filePath) else { continue }
+            processedScreenshotPaths.insert(filePath)
             processScreenshot(at: u)
         }
     }
@@ -177,7 +204,10 @@ class ClipboardMonitor: ObservableObject {
 
     private func startScreenshotPrefsPolling() {
         screenshotPrefsTimer?.invalidate()
-        screenshotPrefsTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+        screenshotPrefsTimer = Timer.scheduledTimer(
+            withTimeInterval: AppConstants.Timing.screenshotPrefsPollingInterval,
+            repeats: true
+        ) { [weak self] _ in
             self?.refreshScreenshotLocation()
         }
     }
@@ -194,19 +224,37 @@ class ClipboardMonitor: ObservableObject {
     private func saveHistory() {
         let context = CoreDataManager.shared.context
         
-        // Clear existing entities
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = ClipboardItemEntity.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        // Incremental save: only add new items not already persisted
+        let fetchRequest: NSFetchRequest<ClipboardItemEntity> = ClipboardItemEntity.fetchRequest()
         
         do {
-            try context.execute(deleteRequest)
+            let existingEntities = try context.fetch(fetchRequest)
+            let existingIDs = Set(existingEntities.compactMap { $0.identifier })
+            
+            // Only insert items not already in the database
+            let itemsToSave = clipboardHistory.prefix(AppConstants.Limits.maxHistoryItems)
+            var newItemsCount = 0
+            
+            for item in itemsToSave {
+                let itemID = item.id.uuidString
+                if !existingIDs.contains(itemID) {
+                    _ = ClipboardItemEntity(from: item, context: context)
+                    newItemsCount += 1
+                }
+            }
+            
+            // Remove items beyond limit
+            if existingEntities.count + newItemsCount > AppConstants.Limits.maxHistoryItems {
+                let itemsToDelete = existingEntities.count + newItemsCount - AppConstants.Limits.maxHistoryItems
+                let oldestItems = existingEntities.suffix(itemsToDelete)
+                for entity in oldestItems {
+                    context.delete(entity)
+                }
+            }
+            
+            AppLogger.coreData.debug("Saving \(newItemsCount) new items to Core Data")
         } catch {
-            print("Error clearing existing clipboard items: \(error)")
-        }
-        
-        // Save up to 100 most recent items
-        for item in clipboardHistory.prefix(100) {
-            _ = ClipboardItemEntity(from: item, context: context)
+            AppLogger.coreData.error("Error preparing incremental save", error: error)
         }
         
         CoreDataManager.shared.saveContext()

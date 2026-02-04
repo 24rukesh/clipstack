@@ -199,14 +199,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func performPaste(item: ClipboardItem) {
         
-        // Check Accessibility Permissions
-        print("[ClipStack] Checking AXIsProcessTrusted...")
-        if !AXIsProcessTrusted() {
-            print("[ClipStack] AXIsProcessTrusted is false. Prompting user.")
+        // Check Accessibility Permissions with retry logic
+        print("[ClipStack] Checking accessibility permissions...")
+        if !PasteUtility.checkAccessibilityPermissions(retryCount: 3, delay: 0.5) {
+            print("[ClipStack] Accessibility permissions not granted after retries.")
             DispatchQueue.main.async {
                 let alert = NSAlert()
                 alert.messageText = "Accessibility Permissions Required"
-                alert.informativeText = "ClipStack needs accessibility permissions to paste automatically. Please check System Settings."
+                alert.informativeText = "ClipStack needs accessibility permissions to paste automatically. Please grant permissions in System Settings."
                 alert.addButton(withTitle: "Open Settings")
                 alert.addButton(withTitle: "Cancel")
                 if alert.runModal() == .alertFirstButtonReturn {
@@ -216,7 +216,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             return
         }
-        print("[ClipStack] AXIsProcessTrusted is true. Proceeding to paste.")
+        print("[ClipStack] Accessibility permissions verified.")
 
         // 1. Ensure content is on pasteboard
         let pasteboard = NSPasteboard.general
