@@ -85,13 +85,49 @@ echo "Distribution artifact ready: dist/ClipStack.app.zip"
 
 # Optional: Build a .pkg installer (single-file installer for /Applications)
 if command -v pkgbuild >/dev/null 2>&1; then
-  echo "Creating PKG: dist/ClipStack.pkg"
-  if [ -n "$SIGN_ID" ]; then
-    pkgbuild --install-location /Applications --component build/ClipStack.app --sign "$SIGN_ID" dist/ClipStack.pkg || echo "PKG build failed (signed)"
-  else
-    pkgbuild --install-location /Applications --component build/ClipStack.app dist/ClipStack.pkg || echo "PKG build failed"
+  APP_PATH="build/ClipStack.app"
+  PKG_PATH="dist/ClipStack.pkg"
+  BUNDLE_ID=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "$APP_PATH/Contents/Info.plist")
+  VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$APP_PATH/Contents/Info.plist")
+
+  echo "Creating PKG: $PKG_PATH"
+
+  # Ensure scripts directory exists
+  mkdir -p scripts
+
+  # Create a preinstall script to remove old versions if it doesn't exist
+  if [ ! -f "scripts/preinstall" ]; then
+    echo "#!/bin/bash" > scripts/preinstall
+    echo "APP_NAME=\"ClipStack.app\"" >> scripts/preinstall
+    echo "INSTALL_LOCATION=\"/Applications\"" >> scripts/preinstall
+    echo "if [ -d \"\$INSTALL_LOCATION/\$APP_NAME\" ]; then" >> scripts/preinstall
+    echo "  echo \"Removing old version of \$APP_NAME from \$INSTALL_LOCATION\"" >> scripts/preinstall
+    echo "  rm -rf \"\$INSTALL_LOCATION/\$APP_NAME\"" >> scripts/preinstall
+    echo "fi" >> scripts/preinstall
+    chmod +x scripts/preinstall
+    echo "Created preinstall script for PKG."
   fi
-  echo "Distribution artifact ready: dist/ClipStack.pkg"
+
+  # PKG with pre-install script to clean up old versions
+  if [ -n "$SIGN_ID" ]; then
+    pkgbuild --root "$APP_PATH" \
+             --identifier "$BUNDLE_ID" \
+             --version "$VERSION" \
+             --install-location /Applications \
+             --scripts scripts \
+             --sign "$SIGN_ID" \
+             "$PKG_PATH" || echo "PKG build failed (signed)"
+  else
+    pkgbuild --root "$APP_PATH" \
+             --identifier "$BUNDLE_ID" \
+             --version "$VERSION" \
+             --install-location /Applications \
+             --scripts scripts \
+             "$PKG_PATH" || echo "PKG build failed"
+  fi
+  echo "Distribution artifact ready: $PKG_PATH"
+  echo ""
+  echo "✨ PKG installer includes automatic cleanup of old versions"
 else
   echo "pkgbuild not found; skipping PKG generation. Install Xcode Command Line Tools to enable."
 fi
