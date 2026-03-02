@@ -55,10 +55,15 @@ struct ClipboardItem: Identifiable, Codable {
     
     // Formatted timestamp for display
     var formattedTimestamp: String {
+        Self.timestampFormatter.string(from: timestamp)
+    }
+    
+    // Static cached formatter to avoid creating new instances repeatedly
+    private static let timestampFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        return formatter.string(from: timestamp)
-    }
+        return formatter
+    }()
     
     // Check if content is a hex color
     var detectedColor: Color? {

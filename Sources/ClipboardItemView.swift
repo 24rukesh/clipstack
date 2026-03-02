@@ -45,6 +45,8 @@ struct ClipboardItemView: View {
                             .cornerRadius(6)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .accessibilityLabel("Copy item to clipboard")
+                    .accessibilityHint("Copies this item to your clipboard")
                     
                     Button(action: {
                         onPaste?()
@@ -61,6 +63,8 @@ struct ClipboardItemView: View {
                         .cornerRadius(6)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .accessibilityLabel("Paste item immediately")
+                    .accessibilityHint("Pastes this item into the active application")
                     
                     Spacer()
                 }

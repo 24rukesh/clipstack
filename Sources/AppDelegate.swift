@@ -38,10 +38,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var eventMonitor: EventMonitor?
     
-    // Phase 2: Capture Bubble
-    // Phase 2 & 3: Capture Bubble Stack
-    var visiblePanels: [FloatingPanel] = []
-    // var bubbleTimer: Timer? // Now managed individually by panels
+    // Removed Bubble Stack Phase
+    // var visiblePanels: [FloatingPanel] = []
 
     func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -49,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Hook up Monitor
         clipboardMonitor.onNewItem = { [weak self] item in
             DispatchQueue.main.async {
-                self?.showCaptureBubble(for: item)
+                self?.notifyUserOfCapture(for: item)
             }
         }
         
@@ -158,43 +156,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    func showCaptureBubble(for item: ClipboardItem) {
-        // 0. Capture current app
-        if let currentApp = NSWorkspace.shared.frontmostApplication {
-             if currentApp.bundleIdentifier != Bundle.main.bundleIdentifier {
-                lastActiveApplication = currentApp
-             }
+    func notifyUserOfCapture(for item: ClipboardItem) {
+        let contentPreview: String
+        switch item.type {
+        case .text:
+            contentPreview = item.content ?? "Text Copied"
+        case .image:
+            contentPreview = "Image Copied"
         }
         
-        // 1. Enforce Max Limit (e.g., 5)
-        // If we already have 5, remove the *oldest* (which is at index 0 in our tracking, or top visually)
-        if visiblePanels.count >= 5 {
-            let oldest = visiblePanels.removeFirst()
-            oldest.close()
-        }
+        // Use a short preview of the content for the notification body
+        let previewLength = 50
+        let body = contentPreview.count > previewLength ? String(contentPreview.prefix(previewLength)) + "..." : contentPreview
         
-        // 2. Create Panel (initially off-screen or at target position)
-        // We'll calculate the exact position in updateStackLayout, so just start at zero
-        let panel = FloatingPanel(contentRect: .zero, item: item, appDelegate: self)
-        
-        // 3. Add to stack
-        visiblePanels.append(panel)
-        
-        // 4. Show and Start Timer
-        panel.makeKeyAndOrderFront(nil)
-        panel.startAutoCloseTimer(duration: 8.0)
-        
-        // 5. Update Layout
-        updateStackLayout()
-        
-        // 6. Monitor closing
-        panel.onCloseCallback = { [weak self] closedPanel in
-            guard let self = self else { return }
-            if let index = self.visiblePanels.firstIndex(of: closedPanel) {
-                self.visiblePanels.remove(at: index)
-                self.updateStackLayout()
-            }
-        }
+        Notifier.notify(title: "ClipStack", body: body)
     }
     
     func performPaste(item: ClipboardItem) {
@@ -268,45 +243,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("[ClipStack] Posted Cmd+V events")
     }
     
-    func updateStackLayout() {
-        guard let screen = NSScreen.main else { return }
-        let visibleFrame = screen.visibleFrame
-        let panelHeight: CGFloat = 80
-        let gap: CGFloat = 10
-        let rightPadding: CGFloat = 20
-        let bottomPadding: CGFloat = 20
-        
-        // Layout Strategy:
-        // Index 0 (Oldest) -> Highest Y
-        // Index Last (Newest) -> Lowest Y (Bottom)
-        // Actually, typically notifications stack UP from bottom.
-        // Newest at Bottom.
-        
-        // Iterating backwards (Newest first) might be easier to visualize "stacking up"
-        // Let y = bottomPadding
-        // For each panel (reversed):
-        //   set frame to y
-        //   y += height + gap
-        
-        var currentY = visibleFrame.minY + bottomPadding
-        
-        // We want the newest (last in array) to be at the bottom? 
-        // Or newest at top?
-        // User agreed: "Newest at Bottom-Right. Older ones slide UP."
-        // So `visiblePanels.last` should be at `bottomPadding`.
-        // `visiblePanels.first` (oldest) should be high up.
-        
-        for panel in visiblePanels.reversed() {
-            let panelWidth: CGFloat = 240
-            let x = visibleFrame.maxX - panelWidth - rightPadding
-            let newFrame = NSRect(x: x, y: currentY, width: panelWidth, height: panelHeight)
-            
-            // Animate
-            panel.animator().setFrame(newFrame, display: true)
-            
-            currentY += panelHeight + gap
-        }
-    }
+    // Removed layout functions for Floating Panels
     
     // New helper to close popover and stop monitor
     @objc func closePopover(_ sender: Any?) {

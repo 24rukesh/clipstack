@@ -9,11 +9,11 @@ class LoginItemManager {
     static let defaultsKeyStartAtLogin = "startAtLogin"
     
     func isStartAtLoginEnabled() -> Bool {
-        return UserDefaults.standard.bool(forKey: Self.defaultsKeyStartAtLogin)
+        return UserDefaults.standard.bool(forKey: AppConstants.DefaultsKeys.startAtLogin)
     }
     
     func setStartAtLogin(_ enabled: Bool) {
-        UserDefaults.standard.set(enabled, forKey: Self.defaultsKeyStartAtLogin)
+        UserDefaults.standard.set(enabled, forKey: AppConstants.DefaultsKeys.startAtLogin)
         if #available(macOS 13.0, *) {
             if enabled {
                 try? SMAppService.mainApp.register()

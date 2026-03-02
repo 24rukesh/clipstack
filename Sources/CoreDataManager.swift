@@ -64,13 +64,21 @@ class CoreDataManager {
     }
     
     func saveContext() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+        guard context.hasChanges else { return }
+        
+        do {
+            try context.save()
+            AppLogger.coreData.debug("Context saved successfully")
+        } catch {
+            let nserror = error as NSError
+            AppLogger.coreData.error("Failed to save context", error: nserror)
+            
+            // Attempt recovery: rollback changes
+            context.rollback()
+            AppLogger.coreData.info("Rolled back failed changes")
+            
+            // In production, could notify user or send to crash reporting
+            // For now, continue execution rather than crashing
         }
     }
 }

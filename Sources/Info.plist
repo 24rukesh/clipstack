@@ -28,5 +28,8 @@
 	<string>public.app-category.productivity</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>ClipStack needs permission to send paste commands to other applications when you select items from your clipboard history.</string>
 </dict>
+
 </plist>
